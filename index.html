@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FanMilk</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <style>
+        .banner-card {
+            width: 275px;
+            height: 595px;
+            background-color: #f2f2f2;
+            position: relative;
+            perspective: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .banner-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .front {
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            background-image: url("img/game-bg.jpeg");
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .third-card {
+            transform: rotateY(180deg);
+            animation: fade-in-top 0.3s linear 0s 1 normal none;
+        }
+
+        @keyframes fade-in-top {
+
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .gif {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
+
+        .button {
+            padding: 10px 40px;
+            background-color: #034B98;
+            color: white;
+            font-weight: 500;
+            margin-left: 85px;
+            display: flex;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            bottom: 100px;
+            border-radius: 5px;
+            animation: myAnim 5s ease 1s infinite normal forwards;
+        }
+
+        .heading-game {
+            font-weight: 600;
+            font-size: 30px;
+            color: #034B98;
+            position: absolute;
+            margin-left: 50px;
+            top: 180px;
+            animation: myAnim 10s ease 4s infinite normal forwards;
+        }
+
+        .subtitle-game {
+            font-weight: 200;
+            font-size: 27px;
+            margin-left: 50px;
+            color: #034B98;
+            position: absolute;
+            top: 210px;
+            animation: myAnim 10s ease 5s infinite normal forwards;
+        }
+
+        .button:hover {
+            background-color: #84a0ef;
+            color: white;
+        }
+
+        .flip-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @keyframes myAnim {
+            0% {
+                animation-timing-function: ease-out;
+                transform: scale(1);
+                transform-origin: center center;
+            }
+
+            10% {
+                animation-timing-function: ease-in;
+                transform: scale(0.91);
+            }
+
+            17% {
+                animation-timing-function: ease-out;
+                transform: scale(0.98);
+            }
+
+            33% {
+                animation-timing-function: ease-in;
+                transform: scale(0.87);
+            }
+
+            45% {
+                animation-timing-function: ease-out;
+                transform: scale(1);
+            }
+        }
+
+        .countdown-timer {
+            color: white;
+            font-weight: 500;
+            animation: myAnim 10s ease 5s infinite normal forwards;
+        }
+
+        .pot {
+            width: 75px;
+            height: auto;
+        }
+
+        .image-row {
+            margin-top: 40px;
+        }
+
+        .bowl {
+            width: 95px;
+            height: auto;
+        }
+
+        .greenbowl {
+            width: 95px;
+            height: auto;
+            display: none;
+            /* Hide the green bowl by default */
+        }
+
+        .bowl-container {
+            margin-left: 70px;
+            display: flex;
+            margin-top: 300px;
+        }
+
+        .scoop {
+            position: relative;
+            width: 40px;
+            height: auto;
+            margin-left: 20px;
+            animation: slide-bottom 2.9s linear 0.9s infinite normal none;
+        }
+
+        .scoop1 {
+            position: relative;
+            width: 60px;
+            height: auto;
+            margin-left: 25px;
+            animation: slide-bottom 2.3s linear 0.6s infinite normal none;
+        }
+
+        .scoop2 {
+            position: relative;
+            width: 40px;
+            height: auto;
+            margin-left: 20px;
+            animation: slide-bottom 2.1s linear 2.2s infinite normal none;
+        }
+
+        @keyframes slide-bottom {
+
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(300px);
+            }
+        }
+
+        .blink {
+            animation: blinkAnimation 0.5s infinite;
+        }
+
+        @keyframes blinkAnimation {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner-card">
+        <div class="front">
+            <img src="img/banner600.jpg" alt="banner600">
+            <img class="gif" src="img/FMWA+Footer.gif" alt="gif">
+            <button class="btn button" onclick="flipCard()">Play</button>
+            <h1 class="heading-game">Let's get you</h1>
+            <h1 class="subtitle-game">some ice cream !</h1>
+        </div>
+        <div class="back">
+            <i class="fas fa-times flip-icon" onclick="flipCard()"></i>
+            <span class="countdown-timer" id="timer">1:00</span>
+            <div class="image-row">
+                <img class="pot" src="img/chocolate-almond-pdt.png" alt="pot-chocolate">
+                <img class="pot" src="img/cream-cookie-pdt.png" alt="pot-almond">
+                <img class="pot" src="img/salted-caramel-pdt.png" alt="pot-caramel">
+                <img class="scoop" src="img/salted-caramel.png" alt="scoop-caramel">
+                <img class="scoop1" src="img/cookie-cream.png" alt="scoop-chocolate">
+                <img class="scoop2" src="img/chocolate-almond.png" alt="scoop-almond">
+            </div>
+            <div class="bowl-container">
+                <img class="bowl" id="bowl" src="img/Bowl.png" alt="bowl" draggable="true">
+                <img class="greenbowl" id="bowl" src="img/bowlgreen.jpg" alt="greenbowl" draggable="true">
+            </div>
+        </div>
+        <div class="third-card" style="display: none;">
+            <img src="img/end-banner.jpg" alt="end-banner">
+        </div>
+    </div>
+
+    <script>
+        function flipCard() {
+            var card = document.querySelector('.banner-card');
+            card.classList.toggle('flipped');
+        }
+
+        function startTimer(duration, display) {
+            var timer = duration,
+                minutes, seconds;
+            var intervalId = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(intervalId); // Stop the timer
+
+                    // Switch the card to display the third card
+                    var card = document.querySelector('.banner-card');
+                    var front = card.querySelector('.front');
+                    var back = card.querySelector('.back');
+                    var thirdCard = card.querySelector('.third-card');
+
+                    card.classList.add('flipped');
+                    front.style.display = 'none';
+                    back.style.display = 'none';
+                    thirdCard.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+
+        window.onload = function () {
+            var twoMinutes = 1 * 30,
+                display = document.querySelector('#timer');
+            startTimer(twoMinutes, display);
+        };
+
+        interact('.bowl')
+            .draggable({
+                inertia: true,
+                modifiers: [
+                    interact.modifiers.restrictRect({
+                        restriction: 'parent',
+                        endOnly: true
+                    })
+                ],
+                autoScroll: true,
+
+                listeners: {
+                    move: dragMoveListener,
+                    end: function (event) {
+                        var textEl = event.target.querySelector('p');
+
+                        textEl && (textEl.textContent =
+                            'moved a distance of ' +
+                            (Math.sqrt(Math.pow(event.pageX - event.x0, 2) +
+                                Math.pow(event.pageY - event.y0, 2) | 0))
+                                .toFixed(2) + 'px');
+
+                        var bowlRect = event.target.getBoundingClientRect();
+                        var bowl = event.target;
+                        var scoopElements = document.getElementsByClassName('scoop','scoop1','scoop2');
+
+                        var isCollisionDetected = false;
+
+                        for (var i = 0; i < scoopElements.length; i++) {
+                            var scoopRect = scoopElements[i].getBoundingClientRect();
+
+                            if (isCollision(bowlRect, scoopRect)) {
+                                scoopElements[i].style.display = 'none';
+                                scoopElements[i].offsetHeight; // Force reflow to restart the animation
+                                scoopElements[i].style.display = 'block';
+                                isCollisionDetected = true;
+
+                                // Switch the bowl image to the green bowl
+                                bowl.classList.add('greenbowl');
+                            }
+                        }
+
+                        if (!isCollisionDetected) {
+                            bowl.classList.remove('greenbowl');
+                        }
+                    }
+                }
+            });
+
+        function isCollision(rect1, rect2) {
+            return !(rect2.left > rect1.right ||
+                rect2.right < rect1.left ||
+                rect2.top > rect1.bottom ||
+                rect2.bottom < rect1.top);
+        }
+
+        function dragMoveListener(event) {
+            var target = event.target
+            // keep the dragged position in the data-x/data-y attributes
+            var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+            var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+            // translate the element
+            target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+
+            // update the posiion attributes
+            target.setAttribute('data-x', x)
+            target.setAttribute('data-y', y)
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+
+</html>
